@@ -1,20 +1,16 @@
 #!/usr/bin/env python3
-""" Run time for four parallel comprehensions """
-
+'''Task 2's module.
+'''
 import asyncio
 import time
-async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-async def measure_runtime() -> float:
-    """ measure total runtime of async_comprehension() 4 times in parallel
-    Returns
-    -------
-    float
-        total runtime in seconds
-    """
-    start = time.perf_counter()
-    coroutines = (async_comprehension() for i in range(4))
-    await asyncio.gather(*coroutines)
-    end = time.perf_counter()
-    return (end - start)
+wait_n = __import__('1-concurrent_coroutines').wait_n
+
+
+def measure_time(n: int, max_delay: int) -> float:
+    '''Computes the average runtime of wait_n.
+    '''
+    start_time = time.time()
+    asyncio.run(wait_n(n, max_delay))
+    return (time.time() - start_time) / n
