@@ -58,4 +58,4 @@ class GithubOrgClient:
             ) == license_key
         except KeyError:
             return False
-        return 
+        return has_license
